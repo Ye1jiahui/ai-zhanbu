@@ -129,11 +129,18 @@ export function App() {
           </aside>
 
           <section className="card-table" aria-label="牌桌">
+            <div className="table-sigil" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
             <div className={`orbital-layout spread-${draw?.spread ?? spread}`}>
               <AnimatePresence mode="popLayout">
                 {(draw?.cards ?? selectedSpread.positions.map((position) => ({ position: position.name } as TableCard))).map((card, index) => (
                   <motion.button
-                    className={`tarot-card ${revealed ? "is-revealed" : ""}`}
+                    className={`tarot-card card-slot-${index + 1} ${revealed ? "is-revealed" : ""}`}
                     key={`${card.position}-${index}-${draw?.seed ?? "preview"}`}
                     type="button"
                     onClick={draw && !revealed ? revealCards : undefined}

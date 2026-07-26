@@ -319,24 +319,24 @@ export function getCardImageUrl(card: string) {
 }
 
 export const spreadPlacements: Record<SpreadKey, SpreadPlacement[]> = {
-  single: [{ x: 50, y: 46, rotate: 0, scale: 1 }],
+  single: [{ x: 50, y: 48, rotate: 0, scale: 1.24 }],
   three: [
-    { x: 23, y: 50, rotate: -6, scale: 1 },
-    { x: 50, y: 46, rotate: 0, scale: 1.06 },
-    { x: 77, y: 50, rotate: 6, scale: 1 },
+    { x: 34, y: 52, rotate: -8, scale: 1.08 },
+    { x: 50, y: 42, rotate: 0, scale: 1.18 },
+    { x: 66, y: 52, rotate: 8, scale: 1.08 },
   ],
   diamond: [
-    { x: 50, y: 18, rotate: 0, scale: 0.95 },
-    { x: 24, y: 50, rotate: -6, scale: 0.95 },
-    { x: 50, y: 50, rotate: 0, scale: 1.04 },
-    { x: 76, y: 50, rotate: 6, scale: 0.95 },
-    { x: 50, y: 82, rotate: 0, scale: 0.95 },
+    { x: 50, y: 20, rotate: 0, scale: 0.98 },
+    { x: 32, y: 50, rotate: -7, scale: 0.96 },
+    { x: 50, y: 50, rotate: 0, scale: 1.06 },
+    { x: 68, y: 50, rotate: 7, scale: 0.96 },
+    { x: 50, y: 80, rotate: 0, scale: 0.98 },
   ],
   moon: [
-    { x: 24, y: 22, rotate: -10, scale: 0.92 },
-    { x: 50, y: 14, rotate: 0, scale: 0.98 },
-    { x: 76, y: 22, rotate: 10, scale: 0.92 },
-    { x: 50, y: 62, rotate: 0, scale: 0.98 },
+    { x: 34, y: 34, rotate: -12, scale: 0.98 },
+    { x: 50, y: 22, rotate: 0, scale: 1.04 },
+    { x: 66, y: 34, rotate: 12, scale: 0.98 },
+    { x: 50, y: 68, rotate: 0, scale: 1.02 },
   ],
   horseshoe: [
     { x: 14, y: 72, rotate: -16, scale: 0.92 },
@@ -348,16 +348,16 @@ export const spreadPlacements: Record<SpreadKey, SpreadPlacement[]> = {
     { x: 50, y: 86, rotate: 0, scale: 0.96 },
   ],
   celtic: [
-    { x: 34, y: 48, rotate: 0, scale: 1 },
-    { x: 34, y: 48, rotate: 90, scale: 0.98 },
-    { x: 34, y: 16, rotate: 0, scale: 0.88 },
+    { x: 34, y: 50, rotate: 0, scale: 1 },
+    { x: 34, y: 50, rotate: 0, scale: 1 },
+    { x: 34, y: 18, rotate: 0, scale: 0.88 },
     { x: 34, y: 82, rotate: 0, scale: 0.88 },
-    { x: 16, y: 14, rotate: -8, scale: 0.84 },
-    { x: 50, y: 28, rotate: 0, scale: 0.84 },
-    { x: 84, y: 14, rotate: 8, scale: 0.84 },
-    { x: 84, y: 38, rotate: 8, scale: 0.84 },
-    { x: 84, y: 62, rotate: 8, scale: 0.84 },
-    { x: 84, y: 86, rotate: 8, scale: 0.84 },
+    { x: 16, y: 50, rotate: -4, scale: 0.88 },
+    { x: 52, y: 50, rotate: 4, scale: 0.88 },
+    { x: 82, y: 82, rotate: 0, scale: 0.82 },
+    { x: 82, y: 60, rotate: 0, scale: 0.82 },
+    { x: 82, y: 38, rotate: 0, scale: 0.82 },
+    { x: 82, y: 16, rotate: 0, scale: 0.82 },
   ],
 };
 
