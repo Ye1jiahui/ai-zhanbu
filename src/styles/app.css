@@ -392,8 +392,11 @@ select {
 .card-art {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .card-caption {
@@ -506,7 +509,8 @@ select {
 .reading-thumb {
   width: 100%;
   aspect-ratio: 0.68;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   border-radius: 12px;
   border: 1px solid rgba(232, 210, 170, 0.12);
   background: rgba(0, 0, 0, 0.15);

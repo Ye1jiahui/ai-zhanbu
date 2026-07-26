@@ -179,28 +179,28 @@ const timeBoost: Record<TimeFactor, string[]> = {
 };
 
 const majorImageNames: Record<string, string> = {
-  愚者: "major-00-fool.svg",
-  魔术师: "major-01-magician.svg",
-  女祭司: "major-02-high-priestess.svg",
-  女皇: "major-03-empress.svg",
-  皇帝: "major-04-emperor.svg",
-  教皇: "major-05-hierophant.svg",
-  恋人: "major-06-lovers.svg",
-  战车: "major-07-chariot.svg",
-  力量: "major-08-strength.svg",
-  隐士: "major-09-hermit.svg",
-  命运之轮: "major-10-wheel.svg",
-  正义: "major-11-justice.svg",
-  倒吊人: "major-12-hanged-man.svg",
-  死神: "major-13-death.svg",
-  节制: "major-14-temperance.svg",
-  恶魔: "major-15-devil.svg",
-  高塔: "major-16-tower.svg",
-  星星: "major-17-star.svg",
-  月亮: "major-18-moon.svg",
-  太阳: "major-19-sun.svg",
-  审判: "major-20-judgement.svg",
-  世界: "major-21-world.svg",
+  愚者: "major-00-fool.jpg",
+  魔术师: "major-01-magician.jpg",
+  女祭司: "major-02-high-priestess.jpg",
+  女皇: "major-03-empress.jpg",
+  皇帝: "major-04-emperor.jpg",
+  教皇: "major-05-hierophant.jpg",
+  恋人: "major-06-lovers.jpg",
+  战车: "major-07-chariot.jpg",
+  力量: "major-08-strength.jpg",
+  隐士: "major-09-hermit.jpg",
+  命运之轮: "major-10-wheel.jpg",
+  正义: "major-11-justice.jpg",
+  倒吊人: "major-12-hanged-man.jpg",
+  死神: "major-13-death.jpg",
+  节制: "major-14-temperance.jpg",
+  恶魔: "major-15-devil.jpg",
+  高塔: "major-16-tower.jpg",
+  星星: "major-17-star.jpg",
+  月亮: "major-18-moon.jpg",
+  太阳: "major-19-sun.jpg",
+  审判: "major-20-judgement.jpg",
+  世界: "major-21-world.jpg",
 };
 
 const suitImageNames: Record<string, string> = {
@@ -315,7 +315,7 @@ export function getCardImageUrl(card: string) {
     国王: "14",
   };
   const suffix = rankMap[rank] ?? rank;
-  return `./assets/tarot/${suitImageNames[suit]}-${suffix}.svg`;
+  return `./assets/tarot/${suitImageNames[suit]}-${suffix}.jpg`;
 }
 
 export const spreadPlacements: Record<SpreadKey, SpreadPlacement[]> = {
