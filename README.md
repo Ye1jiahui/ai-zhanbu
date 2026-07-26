@@ -33,11 +33,14 @@ VITE_TAROT_API_URL=https://1457336238-91vkr9tkvt.ap-guangzhou.tencentscf.com
 3. 在 GitHub Pages 构建里，`.github/workflows/pages.yml` 已经写死当前函数 URL。
 4. 如果你后面更换了腾讯云函数，再同步修改 workflow 里的 URL。
 5. 在 GitHub Pages 设置里选择 GitHub Actions。
-6. 推送到 `main` 后由 `.github/workflows/pages.yml` 构建并发布。
+6. 如果 Actions 里 `configure-pages` 还报 `Get Pages site failed`，在仓库 Secrets 里新增 `PAGES_TOKEN`（一个有 Pages/Repo 写权限的 GitHub PAT），workflow 会自动用它完成 Pages 启用。
+7. 推送到 `main` 后由 `.github/workflows/pages.yml` 构建并发布。
 
 ## 设计说明
 
 首屏不是营销页，而是完整牌桌：输入问题、选择牌阵、洗牌、翻牌、获得解读都在同一条体验路径里完成。视觉采用深色牌桌、旧金细线和纸质牌面，避免泛紫渐变和模板化卡片堆叠。
+
+卡片图像是项目内置的本地静态 SVG 牌面，生成在 `public/assets/tarot/`，上线后不依赖外部图片服务。
 
 ## 隐私
 

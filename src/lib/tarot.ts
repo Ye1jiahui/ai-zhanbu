@@ -26,6 +26,13 @@ export interface SpreadDefinition {
   positions: Array<{ name: string; majorBias: boolean; uprightBias: boolean }>;
 }
 
+export interface SpreadPlacement {
+  x: number;
+  y: number;
+  rotate: number;
+  scale?: number;
+}
+
 const majors = [
   "愚者",
   "魔术师",
@@ -171,6 +178,38 @@ const timeBoost: Record<TimeFactor, string[]> = {
   night: ["major"],
 };
 
+const majorImageNames: Record<string, string> = {
+  愚者: "major-00-fool.svg",
+  魔术师: "major-01-magician.svg",
+  女祭司: "major-02-high-priestess.svg",
+  女皇: "major-03-empress.svg",
+  皇帝: "major-04-emperor.svg",
+  教皇: "major-05-hierophant.svg",
+  恋人: "major-06-lovers.svg",
+  战车: "major-07-chariot.svg",
+  力量: "major-08-strength.svg",
+  隐士: "major-09-hermit.svg",
+  命运之轮: "major-10-wheel.svg",
+  正义: "major-11-justice.svg",
+  倒吊人: "major-12-hanged-man.svg",
+  死神: "major-13-death.svg",
+  节制: "major-14-temperance.svg",
+  恶魔: "major-15-devil.svg",
+  高塔: "major-16-tower.svg",
+  星星: "major-17-star.svg",
+  月亮: "major-18-moon.svg",
+  太阳: "major-19-sun.svg",
+  审判: "major-20-judgement.svg",
+  世界: "major-21-world.svg",
+};
+
+const suitImageNames: Record<string, string> = {
+  权杖: "wands",
+  圣杯: "cups",
+  宝剑: "swords",
+  星币: "pentacles",
+};
+
 export function getTimeFactor(date = new Date()): TimeFactor {
   const hour = date.getHours();
   if (hour >= 6 && hour < 12) return "morning";
@@ -247,4 +286,81 @@ export function getCardGlyph(card: string) {
   if (card.startsWith("圣杯")) return "◒";
   if (card.startsWith("宝剑")) return "◇";
   return "◆";
+}
+
+export function getCardImageUrl(card: string) {
+  const major = majorImageNames[card];
+  if (major) {
+    return `./assets/tarot/${major}`;
+  }
+
+  const suit = Object.keys(suitImageNames).find((item) => card.startsWith(item));
+  if (!suit) return "";
+
+  const rank = card.slice(suit.length);
+  const rankMap: Record<string, string> = {
+    Ace: "01",
+    二: "02",
+    三: "03",
+    四: "04",
+    五: "05",
+    六: "06",
+    七: "07",
+    八: "08",
+    九: "09",
+    十: "10",
+    侍从: "11",
+    骑士: "12",
+    皇后: "13",
+    国王: "14",
+  };
+  const suffix = rankMap[rank] ?? rank;
+  return `./assets/tarot/${suitImageNames[suit]}-${suffix}.svg`;
+}
+
+export const spreadPlacements: Record<SpreadKey, SpreadPlacement[]> = {
+  single: [{ x: 50, y: 46, rotate: 0, scale: 1 }],
+  three: [
+    { x: 23, y: 50, rotate: -6, scale: 1 },
+    { x: 50, y: 46, rotate: 0, scale: 1.06 },
+    { x: 77, y: 50, rotate: 6, scale: 1 },
+  ],
+  diamond: [
+    { x: 50, y: 18, rotate: 0, scale: 0.95 },
+    { x: 24, y: 50, rotate: -6, scale: 0.95 },
+    { x: 50, y: 50, rotate: 0, scale: 1.04 },
+    { x: 76, y: 50, rotate: 6, scale: 0.95 },
+    { x: 50, y: 82, rotate: 0, scale: 0.95 },
+  ],
+  moon: [
+    { x: 24, y: 22, rotate: -10, scale: 0.92 },
+    { x: 50, y: 14, rotate: 0, scale: 0.98 },
+    { x: 76, y: 22, rotate: 10, scale: 0.92 },
+    { x: 50, y: 62, rotate: 0, scale: 0.98 },
+  ],
+  horseshoe: [
+    { x: 14, y: 72, rotate: -16, scale: 0.92 },
+    { x: 28, y: 44, rotate: -8, scale: 0.92 },
+    { x: 41, y: 22, rotate: -2, scale: 0.96 },
+    { x: 59, y: 22, rotate: 2, scale: 0.96 },
+    { x: 72, y: 44, rotate: 8, scale: 0.92 },
+    { x: 86, y: 72, rotate: 16, scale: 0.92 },
+    { x: 50, y: 86, rotate: 0, scale: 0.96 },
+  ],
+  celtic: [
+    { x: 34, y: 48, rotate: 0, scale: 1 },
+    { x: 34, y: 48, rotate: 90, scale: 0.98 },
+    { x: 34, y: 16, rotate: 0, scale: 0.88 },
+    { x: 34, y: 82, rotate: 0, scale: 0.88 },
+    { x: 16, y: 14, rotate: -8, scale: 0.84 },
+    { x: 50, y: 28, rotate: 0, scale: 0.84 },
+    { x: 84, y: 14, rotate: 8, scale: 0.84 },
+    { x: 84, y: 38, rotate: 8, scale: 0.84 },
+    { x: 84, y: 62, rotate: 8, scale: 0.84 },
+    { x: 84, y: 86, rotate: 8, scale: 0.84 },
+  ],
+};
+
+export function getSpreadPlacement(spread: SpreadKey, index: number) {
+  return spreadPlacements[spread][index] ?? { x: 50, y: 50, rotate: 0, scale: 1 };
 }

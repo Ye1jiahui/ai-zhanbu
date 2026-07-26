@@ -1,8 +1,15 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, LoaderCircle, Moon, RotateCcw, Sparkles } from "lucide-react";
 import { requestReading, type TarotReading } from "./lib/api";
-import { drawCards, getCardGlyph, spreadDefinitions, type SpreadKey, type TarotDraw } from "./lib/tarot";
+import {
+  drawCards,
+  getCardImageUrl,
+  spreadDefinitions,
+  getSpreadPlacement,
+  type SpreadKey,
+  type TarotDraw,
+} from "./lib/tarot";
 
 const examples = ["这段关系接下来我该主动吗？", "我现在的事业方向哪里卡住了？", "今天我需要看见什么？"];
 
@@ -131,24 +138,29 @@ export function App() {
                     type="button"
                     onClick={draw && !revealed ? revealCards : undefined}
                     disabled={!draw || revealed || isLoading}
-                    initial={{ opacity: 0, y: 24, rotate: index % 2 ? -4 : 4 }}
-                    animate={{ opacity: 1, y: 0, rotate: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={{ delay: index * 0.045, duration: 0.38 }}
                     aria-label={card.card ? `${card.position}：${card.card}${card.orientation ?? ""}` : card.position}
+                    style={getCardStyle(draw?.spread ?? spread, index)}
                   >
                     <span className="card-position">{card.position}</span>
                     <span className="card-face">
                       {card.card && revealed ? (
                         <>
-                          <span className="card-glyph">{getCardGlyph(card.card)}</span>
-                          <span className="card-name">{card.card}</span>
-                          <span className="card-meta">
-                            {card.orientation} · {card.element}
+                          <img className="card-art" src={getCardImageUrl(card.card)} alt="" loading="lazy" />
+                          <span className="card-caption">
+                            <span className="card-name">{card.card}</span>
+                            <span className="card-meta">
+                              {card.orientation} · {card.element}
+                            </span>
                           </span>
                         </>
                       ) : (
-                        <span className="card-back" aria-hidden="true" />
+                        <span className="card-back" aria-hidden="true">
+                          <span className="card-back-mark">✦</span>
+                        </span>
                       )}
                     </span>
                   </motion.button>
@@ -212,6 +224,7 @@ function ReadingView({ reading, draw }: { reading: TarotReading; draw: TarotDraw
       <div className="reading-grid">
         {reading.cards.map((card) => (
           <article className="reading-card" key={`${card.position}-${card.card}`}>
+            <img className="reading-thumb" src={getCardImageUrl(card.card)} alt="" loading="lazy" />
             <p className="card-kicker">{card.position}</p>
             <h3>
               {card.card} · {card.orientation}
@@ -263,4 +276,14 @@ function ReadingView({ reading, draw }: { reading: TarotReading; draw: TarotDraw
       </footer>
     </>
   );
+}
+
+function getCardStyle(spread: SpreadKey, index: number) {
+  const placement = getSpreadPlacement(spread, index);
+  return {
+    ["--card-x" as string]: `${placement.x}%`,
+    ["--card-y" as string]: `${placement.y}%`,
+    ["--card-rotate" as string]: `${placement.rotate}deg`,
+    ["--card-scale" as string]: `${placement.scale ?? 1}`,
+  } as CSSProperties;
 }
